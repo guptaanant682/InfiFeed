@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-M">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>InfiFeed</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* For custom scrollbars if desired, but Tailwind doesn't directly support this easily. */
+    /* body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; } */
+    /* Custom scrollbar for comment sections and chat windows */
+    .max-h-96::-webkit-scrollbar, .chat-messages-container::-webkit-scrollbar {
+      width: 6px;
+    }
+    .max-h-96::-webkit-scrollbar-track, .chat-messages-container::-webkit-scrollbar-track {
+      background: #f1f1f1;
+      border-radius: 10px;
+    }
+    .max-h-96::-webkit-scrollbar-thumb, .chat-messages-container::-webkit-scrollbar-thumb {
+      background: #c5c5c5;
+      border-radius: 10px;
+    }
+    .max-h-96::-webkit-scrollbar-thumb:hover, .chat-messages-container::-webkit-scrollbar-thumb:hover {
+      background: #a5a5a5;
+    }
+
+    /* Basic chat bubble styles */
+    .chat-bubble-sent {
+      background-color: #3b82f6; /* primary-500 */
+      color: white;
+      border-radius: 1.25rem 1.25rem 0.25rem 1.25rem; /* Tailwind: rounded-2xl rounded-bl-md */
+    }
+    .chat-bubble-received {
+      background-color: #e5e7eb; /* gray-200 */
+      color: #1f2937; /* gray-800 */
+      border-radius: 1.25rem 1.25rem 1.25rem 0.25rem; /* Tailwind: rounded-2xl rounded-br-md */
+    }
+  </style>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: {"50":"#eff6ff","100":"#dbeafe","200":"#bfdbfe","300":"#93c5fd","400":"#60a5fa","500":"#3b82f6","600":"#2563eb","700":"#1d4ed8","800":"#1e40af","900":"#1e3a8a","950":"#172554"}
+          },
+          animation: {
+            'fade-in-fast': 'fadeIn 0.2s ease-out',
+            'pulse-subtle': 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+          },
+          keyframes: {
+            fadeIn: {
+              '0%': { opacity: 0 },
+              '100%': { opacity: 1 },
+            },
+          },
+          fontSize: {
+             'xxs': '.65rem', // For comment timestamps
+          }
+        }
+      }
+    }
+  </script>
+<script type="importmap">
+{
+  "imports": {
+    "react/": "https://esm.sh/react@^19.1.0/",
+    "react": "https://esm.sh/react@^19.1.0",
+    "react-dom/": "https://esm.sh/react-dom@^19.1.0/"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+<body class="bg-gray-50 text-gray-800 antialiased">
+  <div id="root" class="relative z-0"></div> {/* Ensure root is not creating new stacking context over toast unless intended */}
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>
